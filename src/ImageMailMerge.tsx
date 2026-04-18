@@ -651,27 +651,6 @@ const ImageMailMerge: React.FC = () => {
     ui.setShowSuccessMessage(false);
 
     try {
-      if (!isDemoMode) {
-        // Load FE-main API only when needed so demo mode has no FE-main dependency.
-        const apiModule = await import('feMain/api');
-        const apiClient =
-          (apiModule as any).api ||
-          (apiModule as any).default?.api ||
-          (apiModule as any).default;
-
-        if (!apiClient?.basicToolPointConsumption) {
-          throw new Error('FE-main API is unavailable in non-demo mode');
-        }
-
-        // Consume points first and require backend confirmation.
-        // If this fails (e.g. insufficient points), generation and zip download are blocked.
-        const consumeResponse = await apiClient.basicToolPointConsumption('image-mailmerge', imageCount, true);
-
-        if (!consumeResponse.success) {
-          throw new Error(consumeResponse.error || consumeResponse.message || 'Failed to consume points');
-        }
-      }
-
       ui.setProgressText('Starting image generation...');
 
       const result = await generateImagesUtil(
@@ -712,19 +691,6 @@ const ImageMailMerge: React.FC = () => {
 
   return (
     <>
-      {!isDemoMode && FeMainCreditsBridge && (
-        <ErrorBoundary
-          fallback={null}
-          onError={(error) => {
-            console.warn('Credits bridge is unavailable. Continuing without credits integration.', error);
-          }}
-        >
-          <React.Suspense fallback={null}>
-            <FeMainCreditsBridge onReady={handleCreditsBridgeReady} />
-          </React.Suspense>
-        </ErrorBoundary>
-      )}
-
       {/* Success Notification */}
       <SuccessNotification
         show={ui.showSuccessMessage}
