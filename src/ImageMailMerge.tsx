@@ -43,32 +43,7 @@ interface FeMainCreditsBridgeProps {
 
 const EmptyCreditsBridge: React.FC<FeMainCreditsBridgeProps> = () => null;
 
-const FeMainCreditsBridge = isDemoMode
-  ? null
-  : React.lazy<React.ComponentType<FeMainCreditsBridgeProps>>(async () => {
-      const creditsModule = await import('feMain/credits');
-      const useCreditsHook =
-        (creditsModule as any).useCredits ||
-        (creditsModule as any).default?.useCredits;
-
-      if (!useCreditsHook) {
-        return { default: EmptyCreditsBridge };
-      }
-
-      const Bridge: React.FC<FeMainCreditsBridgeProps> = ({ onReady }) => {
-        const creditsContext = useCreditsHook();
-
-        useEffect(() => {
-          if (creditsContext?.decrementCredits) {
-            onReady(creditsContext.decrementCredits);
-          }
-        }, [creditsContext?.decrementCredits, onReady]);
-
-        return null;
-      };
-
-      return { default: Bridge };
-    });
+const FeMainCreditsBridge: React.FC<FeMainCreditsBridgeProps> = () => null;
 
 const ImageMailMerge: React.FC = () => {
   const [showFieldNameModal, setShowFieldNameModal] = useState(false);
