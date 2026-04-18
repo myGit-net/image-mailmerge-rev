@@ -26,8 +26,8 @@ export default defineConfig(({ mode }) => {
       }),
     ],
     build: {
-      outDir: 'dist/mf/image-mailmerge',
-      emptyOutDir: false,
+      outDir: 'dist',
+      emptyOutDir: true,
       target: 'esnext',
     },
     server: getServerConfig(),
