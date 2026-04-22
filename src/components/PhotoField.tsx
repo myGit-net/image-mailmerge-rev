@@ -189,7 +189,7 @@ export const PhotoFieldEditor: React.FC<PhotoFieldProps> = ({
       <div className="border border-purple-200 rounded-lg p-3 mb-3 bg-purple-50">
         <label className="block text-gray-700 text-xs font-medium mb-1">Photo Library</label>
         <p className="text-xs text-gray-500 mb-2">
-          Upload all photos referenced in your spreadsheet. The spreadsheet column should contain the <strong>filename</strong> (e.g., <code>John.png</code>).
+          Upload all photos referenced in your spreadsheet. The spreadsheet column should contain the <strong>filename</strong> (e.g., <code>Rudy.png</code>).
         </p>
         
         <div className="flex gap-2 mb-2">
