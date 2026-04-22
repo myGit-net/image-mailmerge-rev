@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Canva Sans Font Import */
+/* 
+  Note: Canva Sans is a proprietary font. 
+  If you have the font files, you should add them via @font-face here.
+  For now, we'll add a high-quality sans-serif fallback.
+*/
+@font-face {
+  font-family: 'Canva Sans';
+  src: local('Canva Sans'), local('CanvaSans'), local('Open Sans'), local('Arial');
+  font-weight: normal;
+  font-style: normal;
+}
