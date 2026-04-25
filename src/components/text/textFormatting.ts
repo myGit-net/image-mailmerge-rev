@@ -110,14 +110,24 @@ export const drawFormattedText = (
   color: string,
   textAlign: 'left' | 'center' | 'right',
   strokeColor: string = '#000000',
-  strokeWidth: number = 0
+  strokeWidth: number = 0,
+  isBold: boolean = false,
+  isItalic: boolean = false,
+  isUnderline: boolean = false,
+  isStrikethrough: boolean = false
 ) => {
   const segments = parseMarkdownText(text);
   
   // Calculate total width for alignment
   let totalWidth = 0;
   segments.forEach(segment => {
-    applyTextFormatting(ctx, segment.formats, fontFamily, fontSize);
+    const combinedFormats = [...segment.formats];
+    if (isBold && !combinedFormats.includes('bold')) combinedFormats.push('bold');
+    if (isItalic && !combinedFormats.includes('italic')) combinedFormats.push('italic');
+    if (isUnderline && !combinedFormats.includes('underline')) combinedFormats.push('underline');
+    if (isStrikethrough && !combinedFormats.includes('strikethrough')) combinedFormats.push('strikethrough');
+
+    applyTextFormatting(ctx, combinedFormats, fontFamily, fontSize);
     totalWidth += ctx.measureText(segment.text).width;
   });
 
@@ -132,7 +142,13 @@ export const drawFormattedText = (
   // Draw each segment
   let currentX = startX;
   segments.forEach(segment => {
-    const { textDecorations } = applyTextFormatting(ctx, segment.formats, fontFamily, fontSize);
+    const combinedFormats = [...segment.formats];
+    if (isBold && !combinedFormats.includes('bold')) combinedFormats.push('bold');
+    if (isItalic && !combinedFormats.includes('italic')) combinedFormats.push('italic');
+    if (isUnderline && !combinedFormats.includes('underline')) combinedFormats.push('underline');
+    if (isStrikethrough && !combinedFormats.includes('strikethrough')) combinedFormats.push('strikethrough');
+
+    const { textDecorations } = applyTextFormatting(ctx, combinedFormats, fontFamily, fontSize);
     
     ctx.textBaseline = 'top';
 
