@@ -103,7 +103,7 @@ export const ProjectMenu: React.FC<ProjectMenuProps> = ({
             </svg>
             <div className="text-left">
               <div className="font-medium">Export Project</div>
-              <div className="text-xs text-gray-500">Save settings as JSON file</div>
+              <div className="text-xs text-gray-500">Save as JSON file</div>
             </div>
           </button>
 
@@ -120,7 +120,7 @@ export const ProjectMenu: React.FC<ProjectMenuProps> = ({
             </svg>
             <div className="text-left">
               <div className="font-medium">Import Project</div>
-              <div className="text-xs text-gray-500">Load settings from JSON file</div>
+              <div className="text-xs text-gray-500">Load from JSON file</div>
             </div>
           </button>
         </div>
